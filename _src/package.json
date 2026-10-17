@@ -1,0 +1,7 @@
+{
+  "name": "jagis-folierung-build",
+  "private": true,
+  "description": "Build-Werkzeuge für jagis-folierung.de (nicht Teil der Live-Seite)",
+  "scripts": { "build": "bash build.sh" },
+  "devDependencies": { "tailwindcss": "3.4.17" }
+}
