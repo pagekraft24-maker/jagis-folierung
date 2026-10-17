@@ -1,8 +1,6 @@
 /* JAGIS – Website-Skripte (ohne Abhängigkeiten) */
 (function () {
   'use strict';
-  var WA_NUMBER = '4915735626023';
-  var EMAIL = 'gottmannjascha@gmail.com';
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function ready(fn) { if (document.readyState !== 'loading') fn(); else document.addEventListener('DOMContentLoaded', fn); }
@@ -100,76 +98,6 @@
       lb.addEventListener('touchend', function (e) {
         if (sx === null) return; var dx = e.changedTouches[0].clientX - sx;
         if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1)); sx = null;
-      });
-    }
-
-    /* ---------- Paket-Vorauswahl ---------- */
-    document.querySelectorAll('[data-preset-paket]').forEach(function (a) {
-      a.addEventListener('click', function () {
-        var sel = document.getElementById('f-paket');
-        if (sel) sel.value = a.getAttribute('data-preset-paket');
-      });
-    });
-
-    /* ---------- Anfrageformular → WhatsApp ---------- */
-    var form = document.querySelector('[data-contact-form]');
-    if (form) {
-      var success = document.querySelector('[data-form-success]');
-      var errorEl = form.querySelector('[data-form-error]');
-      var counter = form.querySelector('[data-char-count]');
-      var msg = form.querySelector('[name="nachricht"]');
-      var lastText = '';
-      if (msg && counter) msg.addEventListener('input', function () { counter.textContent = '(' + msg.value.length + '/500)'; });
-
-      function compose() {
-        var f = new FormData(form);
-        var zonen = f.getAll('schutzzonen');
-        var lines = ['Hallo JAGIS, ich interessiere mich für eine Lackschutzfolierung.', ''];
-        lines.push('Name: ' + f.get('name'));
-        lines.push('E-Mail: ' + f.get('email'));
-        if (f.get('telefon')) lines.push('Telefon: ' + f.get('telefon'));
-        if (f.get('fahrzeug')) lines.push('Fahrzeug: ' + f.get('fahrzeug'));
-        lines.push('Paket: ' + f.get('paket'));
-        if (f.get('finish')) lines.push('Finish: ' + f.get('finish'));
-        if (zonen.length) lines.push('Zusätzliche Schutzzonen: ' + zonen.join(', '));
-        if (f.get('nachricht')) { lines.push(''); lines.push(String(f.get('nachricht'))); }
-        return lines.join('\n');
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (form.querySelector('[name="phone_alt"]').value.trim() !== '') return;
-        var required = ['name', 'email', 'paket'];
-        var ok = true;
-        required.forEach(function (n) {
-          var el = form.querySelector('[name="' + n + '"]');
-          var valid = el.checkValidity() && String(el.value).trim() !== '';
-          el.classList.toggle('field-error', !valid);
-          el.setAttribute('aria-invalid', String(!valid));
-          if (!valid) ok = false;
-        });
-        errorEl.classList.toggle('hidden', ok);
-        if (!ok) { var first = form.querySelector('.field-error'); if (first) first.focus(); return; }
-        lastText = compose();
-        window.open('https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(lastText), '_blank', 'noopener');
-        form.classList.add('hidden');
-        success.classList.add('is-visible');
-      });
-
-      form.querySelectorAll('input, select, textarea').forEach(function (el) {
-        el.addEventListener('input', function () { el.classList.remove('field-error'); el.removeAttribute('aria-invalid'); });
-      });
-
-      var mailLink = document.querySelector('[data-mail-fallback]');
-      if (mailLink) mailLink.addEventListener('click', function (e) {
-        e.preventDefault();
-        window.location.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent('Anfrage Lackschutzfolierung') + '&body=' + encodeURIComponent(lastText);
-      });
-
-      var reset = document.querySelector('[data-form-reset]');
-      if (reset) reset.addEventListener('click', function () {
-        form.reset(); if (counter) counter.textContent = '(0/500)';
-        success.classList.remove('is-visible'); form.classList.remove('hidden');
       });
     }
   });

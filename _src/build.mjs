@@ -137,7 +137,7 @@ function navbar(isHome) {
 </nav>
 <div id="mobile-menu" class="mobile-menu fixed top-16 left-0 right-0 bottom-0 z-40 bg-[#0A0A0A] flex flex-col items-center justify-center gap-8 transition-all duration-500 md:hidden opacity-0 pointer-events-none" aria-hidden="true">
   ${navLinks.map(([l, h]) => `<a href="${pre}${h}" data-menu-link class="text-white hover:text-[#00B4B4] text-xl tracking-widest uppercase font-bold transition-colors duration-300 cursor-pointer" tabindex="-1">${l}</a>`).join('\n  ')}
-  <a href="${WA}" target="_blank" rel="nofollow noopener noreferrer" data-menu-link tabindex="-1" class="whitespace-nowrap mt-2 px-6 py-3 bg-[#00B4B4] hover:bg-[#009999] text-white text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 cursor-pointer">Angebot anfragen</a>
+  <a href="${pre}#kontakt" data-menu-link tabindex="-1" class="whitespace-nowrap mt-2 px-6 py-3 bg-[#00B4B4] hover:bg-[#009999] text-white text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 cursor-pointer">Angebot anfragen</a>
 </div>`;
 }
 
@@ -356,7 +356,7 @@ function home() {
           </div>
         </div>
         <div class="relative z-10 mt-6">
-          <a href="#kontakt" data-preset-paket="Komfortpaket" class="whitespace-nowrap inline-flex items-center px-6 py-3 bg-[#00B4B4] hover:bg-[#009999] text-white text-xs sm:text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,180,180,0.4)] cursor-pointer">Schutzzonen zusammenstellen</a>
+          <a href="#kontakt" class="whitespace-nowrap inline-flex items-center px-6 py-3 bg-[#00B4B4] hover:bg-[#009999] text-white text-xs sm:text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(0,180,180,0.4)] cursor-pointer">Schutzzonen zusammenstellen</a>
         </div>
       </div>
     </div>
@@ -505,81 +505,48 @@ function home() {
   <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#00B4B4]/20 to-transparent"></div>
 </section>`;
 
-  const input = 'w-full bg-[#111111] border border-[#222222] focus:border-[#00B4B4] text-white text-sm rounded px-4 py-3 outline-none transition-colors duration-300 placeholder:text-[#6B6B6B]';
-  const label = 'block text-[#B0B0B0] text-xs tracking-widest uppercase mb-2';
-  const zonen = ['Ladekante Kofferraum', 'Türeinstiege', 'Türgriffmulden', 'Einstiegsleisten', 'Individuelle Bereiche'];
+  const card = 'reveal card relative group rounded-lg p-8 border transition-all duration-700 border-[#2A2A2A] bg-[#141414] hover:border-[#00B4B4]/60 hover:bg-[#1A1A1A] hover:shadow-[0_20px_50px_rgba(0,180,180,0.15)] hover:-translate-y-2 flex flex-col';
+  const outlineBtn = 'whitespace-nowrap mt-auto inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 border border-[#00B4B4]/40 text-[#00B4B4] hover:bg-[#00B4B4]/10 text-xs sm:text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 cursor-pointer';
+  const contactCard = ({ icon, iconBox, title, text, value, href, btn, btnClass, ext, delay }) => `<article class="${card}" style="transition-delay:${delay}ms">
+        <div class="absolute top-0 left-0 w-16 h-16 rounded-tl-lg transition-opacity duration-500 opacity-0 group-hover:opacity-100" style="background:radial-gradient(circle at 0% 0%, rgba(0,180,180,0.15), transparent 70%)"></div>
+        <div class="w-14 h-14 flex items-center justify-center rounded-md mb-6 ${iconBox}"><i class="${icon} text-2xl" aria-hidden="true"></i></div>
+        <h3 class="font-bold uppercase tracking-widest text-base mb-3 text-white group-hover:text-[#00B4B4] transition-colors duration-300" style="letter-spacing:0.1em">${title}</h3>
+        <p class="text-[#B0B0B0] text-sm leading-relaxed mb-5" style="line-height:1.8">${text}</p>
+        <a href="${href}"${ext ? ' target="_blank" rel="nofollow noopener noreferrer"' : ''} class="text-white font-semibold text-base mb-6 hover:text-[#00B4B4] transition-colors duration-300 break-all">${value}</a>
+        <a href="${href}"${ext ? ' target="_blank" rel="nofollow noopener noreferrer"' : ''} class="${btnClass}">${btn}</a>
+        <div class="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-[#00B4B4] to-transparent rounded-b-lg transition-all duration-500 w-0 group-hover:w-full"></div>
+      </article>`;
   const kontakt = `<section id="kontakt" class="relative bg-[#0D0D0D] py-32 overflow-hidden" aria-labelledby="kontakt-titel">
   ${lineTop()}
   <div class="max-w-7xl mx-auto px-6">
-    <div class="text-center mb-20">
+    <div class="reveal text-center mb-20 transition-all duration-1000">
       ${eyebrow('Kontakt')}
       <h2 id="kontakt-titel" class="text-white font-extrabold uppercase mb-6" style="font-size:clamp(1.8rem, 4vw, 3.2rem);letter-spacing:0.04em">Bereit für <span class="text-[#00B4B4]">dauerhaften Schutz?</span></h2>
-      <p class="text-[#B0B0B0] font-light max-w-xl mx-auto leading-relaxed">Schick uns eine Nachricht – am besten direkt per WhatsApp. Wir antworten schnell.</p>
+      <p class="text-[#B0B0B0] font-light max-w-xl mx-auto leading-relaxed">Schick uns eine Nachricht – am besten direkt per WhatsApp. Wir antworten schnell und erstellen dir ein individuelles Angebot.</p>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-      <div class="reveal reveal-left transition-all duration-1000">
-        <div class="form-success hidden h-full flex-col items-center justify-center text-center py-20 px-6 border border-[#00B4B4]/30 rounded-lg bg-[#111111]" data-form-success>
-          <div class="w-16 h-16 flex items-center justify-center rounded-full bg-[#00B4B4]/10 border border-[#00B4B4]/40 mb-6"><i class="ri-check-line text-3xl text-[#00B4B4]" aria-hidden="true"></i></div>
-          <h3 class="text-white font-bold text-xl uppercase tracking-widest mb-3">Fast geschafft!</h3>
-          <p class="text-[#B0B0B0] text-sm leading-relaxed max-w-xs">Deine Anfrage ist in WhatsApp vorbereitet – tippe dort nur noch auf „Senden“. Kein WhatsApp? <a href="#" data-mail-fallback class="text-[#00B4B4] underline">Per E-Mail senden</a>.</p>
-          <button type="button" data-form-reset class="whitespace-nowrap mt-8 px-6 py-3 border border-[#00B4B4]/40 text-[#00B4B4] text-xs tracking-widest uppercase rounded hover:bg-[#00B4B4]/10 transition-all duration-300 cursor-pointer">Neue Anfrage</button>
-        </div>
-        <form id="kontakt-formular" class="space-y-5" novalidate data-contact-form>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div><label for="f-name" class="${label}">Name *</label><input id="f-name" name="name" type="text" required autocomplete="name" placeholder="Dein Name" class="${input}"></div>
-            <div><label for="f-email" class="${label}">E-Mail *</label><input id="f-email" name="email" type="email" required autocomplete="email" placeholder="deine@email.de" class="${input}"></div>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            <div><label for="f-tel" class="${label}">Telefon</label><input id="f-tel" name="telefon" type="tel" autocomplete="tel" placeholder="+49 ..." class="${input}"></div>
-            <div><label for="f-fahrzeug" class="${label}">Fahrzeug</label><input id="f-fahrzeug" name="fahrzeug" type="text" placeholder="z.B. BMW 3er, VW Golf ..." class="${input}"></div>
-          </div>
-          <div>
-            <label for="f-paket" class="${label}">Gewünschtes Paket *</label>
-            <div class="relative"><select id="f-paket" name="paket" required class="${input} cursor-pointer appearance-none pr-10">
-              <option value="" disabled selected>Bitte wählen …</option>
-              ${['Frontpaket', 'Frontpaket Plus', 'Komplettschutz', 'Nur einzelne Schutzzonen', 'Komfortpaket', 'Displayschutz', 'Beratung gewünscht'].map((o) => `<option value="${o}">${o}</option>`).join('')}
-            </select><i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-[#B0B0B0] pointer-events-none" aria-hidden="true"></i></div>
-          </div>
-          <div>
-            <label for="f-finish" class="${label}">Finish</label>
-            <div class="relative"><select id="f-finish" name="finish" class="${input} cursor-pointer appearance-none pr-10">
-              <option value="" disabled selected>Bitte wählen …</option>
-              ${['Glanz', 'Matt', 'Satin Matt', 'Noch unentschieden'].map((o) => `<option value="${o}">${o}</option>`).join('')}
-            </select><i class="ri-arrow-down-s-line absolute right-3 top-1/2 -translate-y-1/2 text-[#B0B0B0] pointer-events-none" aria-hidden="true"></i></div>
-          </div>
-          <fieldset>
-            <legend class="block text-[#B0B0B0] text-xs tracking-widest uppercase mb-3">Zusätzliche Schutzzonen</legend>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              ${zonen.map((z) => `<label class="zone-chip flex items-center gap-3 px-4 py-2.5 rounded border cursor-pointer transition-all duration-300 border-[#222222] bg-[#111111] text-[#B0B0B0] hover:border-[#00B4B4]/30">
-                <input type="checkbox" name="schutzzonen" value="${z}" class="sr-only peer">
-                <span class="zone-box w-4 h-4 rounded border flex items-center justify-center flex-shrink-0 transition-all duration-200 border-[#444]"><i class="ri-check-line text-[10px] text-white" aria-hidden="true"></i></span>
-                <span class="text-xs">${z}</span>
-              </label>`).join('\n              ')}
-            </div>
-          </fieldset>
-          <div>
-            <label for="f-nachricht" class="${label}">Nachricht <span class="ml-2 font-normal normal-case text-[#6B6B6B]" data-char-count>(0/500)</span></label>
-            <textarea id="f-nachricht" name="nachricht" rows="5" maxlength="500" placeholder="Erzähl uns von deinen Wünschen ..." class="${input} resize-none"></textarea>
-          </div>
-          <div class="hp" aria-hidden="true"><label for="f-hp">Bitte leer lassen</label><input id="f-hp" type="text" name="phone_alt" tabindex="-1" autocomplete="off"></div>
-          <p class="text-red-400 text-sm hidden" data-form-error role="alert">Bitte fülle Name, E-Mail und Paket aus.</p>
-          <button type="submit" class="whitespace-nowrap w-full py-4 bg-[#00B4B4] hover:bg-[#009999] disabled:opacity-60 text-white text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 hover:shadow-[0_0_25px_rgba(0,180,180,0.4)] cursor-pointer inline-flex items-center justify-center gap-2"><i class="ri-whatsapp-line text-lg" aria-hidden="true"></i>Anfrage absenden</button>
-          <p class="text-[#6B6B6B] text-xs leading-relaxed">Deine Angaben werden als vorbereitete Nachricht in WhatsApp geöffnet und erst gesendet, wenn du dort auf „Senden“ tippst. Mehr in der <a href="/datenschutz" class="underline hover:text-[#00B4B4]">Datenschutzerklärung</a>.</p>
-        </form>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      ${contactCard({ icon: 'ri-whatsapp-line', iconBox: 'bg-[#25D366]/15 text-[#25D366]', title: 'WhatsApp', text: 'Der schnellste Weg: Schick uns Fotos deines Fahrzeugs und sag uns, welche Bereiche du schützen willst.', value: PHONE_DISPLAY, href: WA, ext: true, delay: 0,
+        btn: '<i class="ri-whatsapp-line text-lg" aria-hidden="true"></i>Per WhatsApp schreiben', btnClass: 'whitespace-nowrap mt-auto inline-flex items-center justify-center gap-2 w-full px-6 py-3.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs sm:text-sm tracking-widest uppercase font-bold rounded transition-all duration-300 hover:shadow-[0_0_20px_rgba(37,211,102,0.4)] cursor-pointer' })}
+      ${contactCard({ icon: 'ri-phone-line', iconBox: 'bg-[#00B4B4]/10 text-[#00B4B4]', title: 'Telefon', text: 'Lieber persönlich? Ruf an – wir beraten dich zu Paket, Finish und Termin.', value: PHONE_DISPLAY, href: `tel:${PHONE_INTL}`, ext: false, delay: 100,
+        btn: '<i class="ri-phone-line text-lg" aria-hidden="true"></i>Jetzt anrufen', btnClass: outlineBtn })}
+      ${contactCard({ icon: 'ri-mail-line', iconBox: 'bg-[#00B4B4]/10 text-[#00B4B4]', title: 'E-Mail', text: 'Schreib uns mit Fahrzeugmodell und Wunschpaket – gern auch mit Fotos im Anhang.', value: EMAIL, href: `mailto:${EMAIL}?subject=${encodeURIComponent('Anfrage Lackschutzfolierung')}`, ext: false, delay: 200,
+        btn: '<i class="ri-mail-line text-lg" aria-hidden="true"></i>E-Mail schreiben', btnClass: outlineBtn })}
+    </div>
+    <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="reveal bg-[#111111] border border-[#1E1E1E] rounded-lg p-8 transition-all duration-700">
+        <h3 class="text-white font-bold uppercase tracking-widest text-sm mb-6">Für dein Angebot brauchen wir</h3>
+        <ul class="space-y-4">
+          ${[['ri-car-line', 'Fahrzeugmodell und Baujahr'], ['ri-shield-check-line', 'Gewünschtes Paket oder einzelne Schutzzonen'], ['ri-contrast-drop-2-line', 'Finish: Glanz, Matt oder Satin Matt'], ['ri-camera-line', 'Ein paar Fotos deines Fahrzeugs']].map(([i, t]) => `<li class="flex items-center gap-4 text-[#B0B0B0] text-sm"><span class="w-10 h-10 flex items-center justify-center rounded-md bg-[#00B4B4]/10 border border-[#00B4B4]/20 flex-shrink-0"><i class="${i} text-[#00B4B4] text-lg" aria-hidden="true"></i></span>${t}</li>`).join('\n          ')}
+        </ul>
       </div>
-      <div class="reveal reveal-right flex flex-col gap-8 transition-all duration-1000" style="transition-delay:200ms">
-        ${waBtn('Direkt per WhatsApp schreiben', 'text-center sm:whitespace-nowrap flex items-center justify-center gap-3 py-3 md:py-4 px-4 md:px-6 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-xs sm:text-sm tracking-widest uppercase rounded border border-[#25D366] hover:border-[#1ebe5d] transition-all duration-300 hover:shadow-[0_0_25px_rgba(37,211,102,0.4)] cursor-pointer max-w-full')}
-        <div class="bg-[#111111] border border-[#1E1E1E] rounded-lg p-8 space-y-6">
-          ${[
-            ['ri-map-pin-line', 'Adresse', `${STREET}, ${ZIP} ${CITY}`, MAPS, true],
-            ['ri-whatsapp-line', 'WhatsApp / Telefon', PHONE_DISPLAY, `tel:${PHONE_INTL}`, false],
-            ['ri-mail-line', 'E-Mail', EMAIL, `mailto:${EMAIL}`, false],
-          ].map(([icon, l, v, href, ext]) => `<div class="flex items-start gap-4">
-            <div class="w-10 h-10 flex items-center justify-center rounded-md bg-[#00B4B4]/10 border border-[#00B4B4]/20 flex-shrink-0"><i class="${icon} text-[#00B4B4] text-lg" aria-hidden="true"></i></div>
-            <div class="min-w-0"><div class="text-[#B0B0B0] text-xs tracking-widest uppercase mb-1">${l}</div><a href="${href}"${ext ? ' target="_blank" rel="noopener"' : ''} class="text-white text-sm font-medium hover:text-[#00B4B4] transition-colors duration-300 break-all">${v}</a></div>
-          </div>`).join('\n          ')}
+      <div class="reveal transition-all duration-700" style="transition-delay:150ms">
+        <div class="h-full rounded-lg border border-[#1E1E1E] bg-[#111111] p-8 flex flex-col items-center justify-center text-center">
+          <i class="ri-map-pin-2-line text-[#00B4B4] text-3xl mb-3" aria-hidden="true"></i>
+          <p class="text-white text-sm font-bold mb-1">${NAME}</p>
+          <p class="text-[#B0B0B0] text-sm mb-2">${STREET}, ${ZIP} ${CITY}</p>
+          <p class="text-[#6B6B6B] text-xs leading-relaxed mb-6 max-w-sm">Termine nach Vereinbarung. Hol- und Bringservice für Essen, Wuppertal, Solingen und Düsseldorf auf Anfrage.</p>
+          <a href="${MAPS}" target="_blank" rel="noopener" class="whitespace-nowrap px-5 py-2.5 border border-[#00B4B4]/40 text-[#00B4B4] hover:bg-[#00B4B4]/10 text-xs tracking-widest uppercase font-semibold rounded transition-all duration-300 cursor-pointer">Route planen</a>
         </div>
-        ${mapCard()}
       </div>
     </div>
   </div>
@@ -617,7 +584,7 @@ function locationNav() {
     </a>
     <div class="flex items-center gap-4">
       <a href="/" class="hidden sm:inline text-[#B0B0B0] hover:text-[#00B4B4] text-xs tracking-widest uppercase font-medium transition-colors duration-300 cursor-pointer">Startseite</a>
-      <a href="${WA}" target="_blank" rel="nofollow noopener noreferrer" class="whitespace-nowrap px-4 py-2 bg-[#00B4B4] hover:bg-[#009999] text-white text-xs tracking-widest uppercase font-semibold rounded transition-all duration-300 cursor-pointer">Angebot anfragen</a>
+      <a href="/#kontakt" class="whitespace-nowrap px-4 py-2 bg-[#00B4B4] hover:bg-[#009999] text-white text-xs tracking-widest uppercase font-semibold rounded transition-all duration-300 cursor-pointer">Angebot anfragen</a>
     </div>
   </div>
 </nav>`;

@@ -67,18 +67,6 @@
 .lightbox.is-open { display: flex; }
 [data-dot].is-active { background: #00B4B4; width: 1rem; }
 
-/* Formular */
-.zone-box i { opacity: 0; transition: opacity .2s; }
-.zone-chip:has(input:checked) { border-color: rgba(0,180,180,0.6); background: rgba(0,180,180,0.1); color: #00B4B4; }
-.zone-chip:has(input:checked) .zone-box { border-color: #00B4B4; background: #00B4B4; }
-.zone-chip:has(input:checked) .zone-box i { opacity: 1; }
-.zone-chip:has(input:focus-visible) { outline: 2px solid #00B4B4; outline-offset: 2px; }
-select:invalid, select:has(option[value=""]:checked) { color: #6B6B6B; }
-select option { color: #fff; background: #111111; }
-.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-.form-success.is-visible { display: flex; }
-.field-error { border-color: #f87171 !important; }
-
 /* Rechtstexte */
 .legal h2 { color: #fff; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; font-size: .95rem; margin: 2.5rem 0 1rem; }
 .legal p { margin-bottom: 1rem; }

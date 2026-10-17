@@ -1,13 +1,12 @@
 @font-face{font-family:"remixicon";src:url("/assets/fonts/remixicon-subset.woff2") format("woff2");font-display:block}
 [class^="ri-"],[class*=" ri-"]{font-family:"remixicon"!important;font-style:normal;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;line-height:1;display:inline-block}
 .ri-add-line:before{content:"\ea13"}
-.ri-arrow-down-s-line:before{content:"\ea4e"}
 .ri-arrow-left-s-line:before{content:"\ea64"}
 .ri-arrow-right-s-line:before{content:"\ea6e"}
 .ri-award-line:before{content:"\ea8a"}
+.ri-camera-line:before{content:"\eb31"}
 .ri-car-line:before{content:"\eb39"}
 .ri-chat-check-line:before{content:"\eb55"}
-.ri-check-line:before{content:"\eb7b"}
 .ri-close-line:before{content:"\eb99"}
 .ri-contrast-drop-2-line:before{content:"\ebd6"}
 .ri-door-open-line:before{content:"\ec4c"}
@@ -16,7 +15,6 @@
 .ri-layout-bottom-2-line:before{content:"\ee89"}
 .ri-mail-line:before{content:"\eef6"}
 .ri-map-pin-2-line:before{content:"\ef0a"}
-.ri-map-pin-line:before{content:"\ef14"}
 .ri-money-euro-circle-line:before{content:"\ef69"}
 .ri-moon-clear-line:before{content:"\ef6f"}
 .ri-phone-line:before{content:"\efec"}
